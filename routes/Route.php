@@ -9,11 +9,11 @@ class Route
     public static function get(string $route, string $controllerMethod)
     {
 
-        $controllerMethodParams = explode('/', $controllerMethod);
+        $controllerMethodParams = explode('@', $controllerMethod);
 
         self::$map['GET'][$route] = [
             "route" => $route,
-            "controller" => $controllerMethodParams[0],
+            "controller" => "app\Controllers\\{$controllerMethodParams[0]}",
             "method" => $controllerMethodParams[1],
             "arguments" => []
         ];
@@ -25,7 +25,7 @@ class Route
 
         self::$map['POST'][$route] = [
             "route" => $route,
-            "controller" => $controllerMethodParams[0],
+            "controller" => "app/Controllers/{$controllerMethodParams[0]}",
             "method" => $controllerMethodParams[1],
             "arguments" => []
         ];
@@ -37,7 +37,7 @@ class Route
 
         self::$map['DELETE'][$route] = [
             "route" => $route,
-            "controller" => $controllerMethodParams[0],
+            "controller" => "app/Controllers/{$controllerMethodParams[0]}",
             "method" => $controllerMethodParams[1],
             "arguments" => []
         ];
@@ -50,7 +50,7 @@ class Route
 
         self::$map['PUT'][$route] = [
             "route" => $route,
-            "controller" => $controllerMethodParams[0],
+            "controller" => "app/Controllers/{$controllerMethodParams[0]}",
             "method" => $controllerMethodParams[1],
             "arguments" => []
         ];
@@ -70,7 +70,7 @@ class Route
         $class = self::$map['GET'][$route]["controller"];
         $method = self::$map['GET'][$route]["method"];
         $params = self::$map['GET'][$route]["arguments"];
-
+        
         if (class_exists($class)) {
             $controller = new $class;
             if (method_exists($controller, $method)) {

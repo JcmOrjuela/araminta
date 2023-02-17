@@ -1,5 +1,7 @@
 <?php
 
-const DB_DSN_TEST = 'databse_test';
-const DB_USER_ = 'root';
-const DB_PASS_ = '';
+const ROOT = 'araminta';
+
+const DB_DSN_TEST = 'mysql:dbname=database_test;host=127.0.0.1';
+const DB_USER_TEST = 'root';
+const DB_PASS_TEST = '';

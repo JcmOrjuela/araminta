@@ -1,13 +1,13 @@
 <?php
 
-namespace Database;
+namespace app\Database;
 
 class Dbconnection
 {
     public $pdo;
     private $dbName;
 
-    public function __construct($dbName)
+    public function __construct($dbName = 'TEST')
     {
         $this->dbName = strtoupper($dbName);
         try {
@@ -19,7 +19,8 @@ class Dbconnection
 
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
-            echo "ERROR: " . $e->getMessage();
+            echo "ERROR EN LA CONEXIÓN: " . $e->getMessage();
+            die;
         }
     }
     public static function conn($dbName)

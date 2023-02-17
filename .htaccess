@@ -1,0 +1,9 @@
+#Regla para ocultar los archivos dentro del directorio
+Options -Indexes
+Options -Multiviews
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [L]
+
