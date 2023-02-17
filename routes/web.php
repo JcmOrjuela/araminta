@@ -2,4 +2,4 @@
 
 use routes\Route;
 
-Route::view('/', 'home');
+Route::view('/','home');

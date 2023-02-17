@@ -9,39 +9,73 @@ class Route
     public static function get(string $route, string $controllerMethod)
     {
 
-        $controllerMethodParams =  explode('/', $controllerMethod);
+        $controllerMethodParams = explode('/', $controllerMethod);
 
-        SELF::$map['get'][$route] = [
+        self::$map['GET'][$route] = [
             "route" => $route,
             "controller" => $controllerMethodParams[0],
             "method" => $controllerMethodParams[1],
-            "arguments" => ''
+            "arguments" => []
+        ];
+    }
+    public static function post(string $route, string $controllerMethod)
+    {
+
+        $controllerMethodParams = explode('/', $controllerMethod);
+
+        self::$map['POST'][$route] = [
+            "route" => $route,
+            "controller" => $controllerMethodParams[0],
+            "method" => $controllerMethodParams[1],
+            "arguments" => []
+        ];
+    }
+    public static function delete(string $route, string $controllerMethod)
+    {
+
+        $controllerMethodParams = explode('/', $controllerMethod);
+
+        self::$map['DELETE'][$route] = [
+            "route" => $route,
+            "controller" => $controllerMethodParams[0],
+            "method" => $controllerMethodParams[1],
+            "arguments" => []
         ];
     }
 
-    public static function view(string $route, string $nameView)
-    {dd('aca');
-        SELF::$map['get'][$route] = [
+    public static function put(string $route, string $controllerMethod)
+    {
+
+        $controllerMethodParams = explode('/', $controllerMethod);
+
+        self::$map['PUT'][$route] = [
             "route" => $route,
-            "controller" => 'ViewController',
+            "controller" => $controllerMethodParams[0],
+            "method" => $controllerMethodParams[1],
+            "arguments" => []
+        ];
+    }
+
+    public static function view(string $route, string $viewName, array $params = [])
+    {
+        self::$map['GET'][$route] = [
+            "route" => $route,
+            "controller" => 'app\Controllers\ViewController',
             "method" => 'render',
+            "arguments" => $viewName
         ];
     }
     public static function redirect(string $route)
     {
-        $class = SELF::$map['get'][$route]["controller"];
-        $method = SELF::$map['get'][$route]["method"];
+        $class = self::$map['GET'][$route]["controller"];
+        $method = self::$map['GET'][$route]["method"];
+        $params = self::$map['GET'][$route]["arguments"];
 
         if (class_exists($class)) {
-            require_once "$HOME/Controllers/$class}.php";
-
             $controller = new $class;
             if (method_exists($controller, $method)) {
-                $controller->{$method}($params);
+                return $controller->{$method}($params);
             }
         }
-    }
-    public static function name(string $name)
-    {
     }
 }

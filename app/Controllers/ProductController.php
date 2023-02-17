@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers;
+namespace app\Controllers;
 
 class ProductController extends Controller
 {
