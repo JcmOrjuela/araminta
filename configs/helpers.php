@@ -1,4 +1,8 @@
 <?php
+
+use app\Controllers\ViewController;
+use routes\Route;
+
 function dd($data, $var = 'web')
 {
     switch ($var) {
@@ -17,9 +21,9 @@ function dd($data, $var = 'web')
 
 function requestUri()
 {
-    $index = strpos($_SERVER['REQUEST_URI'], ROOT);
+    $index = strpos($_SERVER['REQUEST_URI'], PROJECT_NAME);
     $requestUri = substr($_SERVER['REQUEST_URI'], $index);
-    $uri = preg_replace('/' . ROOT . '/i', '', $requestUri);
+    $uri = preg_replace('/' . PROJECT_NAME . '/i', '', $requestUri);
     return preg_replace('/\/\//i', '/', $uri);
 }
 
@@ -38,8 +42,15 @@ function requestMethod()
 }
 function camelCaseToSnakeCase($str)
 {
-    $str = preg_replace('/([a-z])([A-Z])/', '$1_$2', $str); // Convierte de CamelCase a snake_case
+    $str = preg_replace('/([a-z])([A-Z])/', '$1_$2', $str);
     return strtolower($str);
+}
+function snakeCaseToCamelCase($str)
+{
+    $str = ucwords($str, '_');
+    $str = lcfirst($str);
+    $str = str_replace('_', '', $str);
+    return $str;
 }
 
 function singularToPlural($word)
@@ -63,4 +74,29 @@ function singularToPlural($word)
     } else {
         return $word . 's';
     }
+}
+
+function toArray($data)
+{
+    return (array) $data;
+}
+function toJson($data)
+{
+    return json_encode($data);
+}
+
+function redirect($route)
+{
+    $route = "/" . ROOT . $route;
+    header("Location: $route");
+}
+function view($route, array $params)
+{
+    $view =  new  ViewController;
+    return $view->render($route, $params);
+}
+
+function route($route)
+{
+    return ROOT . $route;
 }

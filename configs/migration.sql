@@ -1,44 +1,33 @@
 CREATE DATABASE `database_test`
 
-CREATE TABLE `products` (
-	`id` INT(10) UNSIGNED ZEROFILL NULL DEFAULT NULL,
-	`name` VARCHAR(70) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
-	`reference` VARCHAR(40) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
-	`price` INT(11) NULL DEFAULT NULL,
-	`weith` INT(11) NULL DEFAULT NULL,
-	`category` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
-	`stock` INT(11) NULL DEFAULT NULL,
-	`created_at` DATETIME NULL DEFAULT NULL,
-	`updated_at` DATETIME NULL DEFAULT NULL,
-	`deleted_at` DATETIME NULL DEFAULT NULL,
-	`last_user` DATETIME NULL DEFAULT NULL,
-	PRIMARY KEY(`id`)
-)
-COLLATE='utf8mb3_general_ci'
-ENGINE=InnoDB
-;
+USE `database_test`
 
-CREATE TABLE `sales` (
-	`id` INT UNSIGNED ZEROFILL NULL,
-	`product_id` INT UNSIGNED NULL,
-	`quantity` INT UNSIGNED NULL,
-	`total` INT UNSIGNED NULL,
-	`salesman` VARCHAR(50) NULL DEFAULT NULL,
-	`customer` VARCHAR(50) NULL DEFAULT NULL,
-	CONSTRAINT `FK_product_id` FOREIGN KEY (`product_id`) REFERENCES `` () ON UPDATE NO ACTION ON DELETE NO ACTION
-)
-COLLATE='utf8mb3_general_ci'
-;
+CREATE TABLE products (
+	id INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(70),
+	reference VARCHAR(40),
+	price INT(11),
+	weigth INT(11),
+	category VARCHAR(50),
+	stock INT(11),
+	created_at DATETIME DEFAULT NOW(),
+	updated_at DATETIME DEFAULT NOW(),
+	deleted_at DATETIME,
+	last_user VARCHAR(50),
+    PRIMARY KEY (id)
+);
 
-CREATE TABLE `sales` (
-	`id` INT UNSIGNED ZEROFILL NULL,
-	`product_id` INT UNSIGNED NULL,
-	`quantity` INT UNSIGNED NULL,
-	`total` INT UNSIGNED NULL,
-	`salesman` VARCHAR(50) NULL DEFAULT NULL,
-	`customer` VARCHAR(50) NULL DEFAULT NULL,
-	PRIMARY KEY (`id`),
+CREATE TABLE sales (
+	id INT AUTO_INCREMENT NOT NULL,
+	product_id INT,
+	quantity INT,
+	total INT NOT NULL,
+	salesman VARCHAR(50),
+	customer VARCHAR(50),
+	updated_at DATETIME DEFAULT NOW(),
+	created_at DATETIME DEFAULT NOW(),
+	deleted_at DATETIME DEFAULT NOW(),
+	last_user_at DATETIME DEFAULT NOW(),
+	PRIMARY KEY (id),
 	FOREIGN KEY (product_id) REFERENCES products(id)
-)
-COLLATE='utf8mb3_general_ci'
-;
+);

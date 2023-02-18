@@ -5,5 +5,5 @@ Options -Multiviews
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php [L]
+RewriteRule ^(.*)$ app/app.php [L]
 

@@ -3,39 +3,41 @@
 namespace app\Controllers;
 
 use app\Models\Product;
+use app\Models\Sale;
 use app\Request;
 
-class ProductController extends Controller
+class SaleController extends Controller
 {
     public function index()
     {
+        $sales = Sale::all();
         $products = Product::all();
 
-        return view('products/index', compact('products'));
+        return view('sales/index', compact('sales','products'));
     }
 
     public function store(Request $r)
     {
-        $product = Product::create(
+        $Sale = Sale::create(
             (array) $r->all()
         );
 
-        return redirect('products');
+        return redirect('sales');
     }
 
     public function update(Request $r, $id)
     {
-        // $product = Product::update(
+        // $Sale = Sale::update(
         //     (array) $r->all()
         // );
 
-        return redirect('products');
+        return redirect('sales');
     }
 
     public function destroy($id)
     {
-        $product = Product::softDelete($id);
+        $Sale = Sale::softDelete($id);
 
-        return redirect('products');
+        return redirect('sales');
     }
 }

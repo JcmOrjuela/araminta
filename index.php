@@ -1,7 +1,3 @@
-<?php
-require_once "app/app.php";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,14 +9,12 @@ require_once "app/app.php";
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<body>
+<body id="app">
     <header>
-        <div class="bg-primary m-5">
-            <?= $header ?>
-        </div>
+        <?= $headers ?>
     </header>
     <nav>
-        <?= $lateralNav ?>
+        <?= $navLateral ?>
     </nav>
     <main>
         <?= $section ?>
@@ -29,6 +23,7 @@ require_once "app/app.php";
         <?= $footer ?>
     </footer>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <?= $script ?? '' ?>
 </body>
 
 </html>
